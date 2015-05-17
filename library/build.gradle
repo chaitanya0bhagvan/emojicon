@@ -3,12 +3,12 @@ apply from: 'gradle-mvn-push.gradle'
 
 ext.emojiconVersionName = "1.2-SNAPSHOT"
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
 
     defaultConfig {
-        minSdkVersion 7
-        targetSdkVersion 21
+        minSdkVersion 8
+        targetSdkVersion 22
         versionCode 3
         versionName emojiconVersionName
     }
@@ -18,5 +18,10 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:21.0.2'
+    compile 'com.android.support:support-v4:22.1.1'
+    compile 'com.android.support:appcompat-v7:22.1.1'
+
+    compile 'com.ogaclejapan.smarttablayout:library:1.1.3@aar'
+    compile 'com.ogaclejapan.smarttablayout:utils-v4:1.1.3@aar'
+
 }

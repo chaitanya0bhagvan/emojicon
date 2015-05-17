@@ -22,4 +22,7 @@
         <attr name="emojiconTextLength" format="integer"/>
         <attr name="emojiconUseSystemDefault" format="boolean"/>
     </declare-styleable>
+    <declare-styleable name="TintableImageView">
+        <attr name="tint" format="reference|color"/>
+    </declare-styleable>
 </resources>

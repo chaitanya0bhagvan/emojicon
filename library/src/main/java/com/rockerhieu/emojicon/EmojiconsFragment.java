@@ -18,6 +18,7 @@ package com.rockerhieu.emojicon;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -28,6 +29,9 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.*;
 import android.widget.EditText;
+import android.widget.ImageView;
+
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.rockerhieu.emojicon.emoji.*;
 
 import java.util.Arrays;
@@ -39,7 +43,6 @@ import java.util.List;
 public class EmojiconsFragment extends Fragment implements ViewPager.OnPageChangeListener, EmojiconRecents {
     private OnEmojiconBackspaceClickedListener mOnEmojiconBackspaceClickedListener;
     private int mEmojiTabLastSelectedIndex = -1;
-    private View[] mEmojiTabs;
     private PagerAdapter mEmojisAdapter;
     private EmojiconRecentsManager mRecentsManager;
     private boolean mUseSystemDefault = false;
@@ -71,22 +74,12 @@ public class EmojiconsFragment extends Fragment implements ViewPager.OnPageChang
         ));
         emojisPager.setAdapter(mEmojisAdapter);
 
-        mEmojiTabs = new View[6];
-        mEmojiTabs[0] = view.findViewById(R.id.emojis_tab_0_recents);
-        mEmojiTabs[1] = view.findViewById(R.id.emojis_tab_1_people);
-        mEmojiTabs[2] = view.findViewById(R.id.emojis_tab_2_nature);
-        mEmojiTabs[3] = view.findViewById(R.id.emojis_tab_3_objects);
-        mEmojiTabs[4] = view.findViewById(R.id.emojis_tab_4_cars);
-        mEmojiTabs[5] = view.findViewById(R.id.emojis_tab_5_punctuation);
-        for (int i = 0; i < mEmojiTabs.length; i++) {
-            final int position = i;
-            mEmojiTabs[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    emojisPager.setCurrentItem(position);
-                }
-            });
-        }
+        final SmartTabLayout emojisTab = (SmartTabLayout) view.findViewById(R.id.emojis_tab);
+
+        setupTab(emojisTab);
+
+        emojisTab.setViewPager(emojisPager);
+
         view.findViewById(R.id.emojis_backspace).setOnTouchListener(new RepeatListener(1000, 50, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +105,42 @@ public class EmojiconsFragment extends Fragment implements ViewPager.OnPageChang
             emojisPager.setCurrentItem(page, false);
         }
         return view;
+    }
+
+    private void setupTab(SmartTabLayout layout) {
+        final LayoutInflater inflater = LayoutInflater.from(layout.getContext());
+        final Resources res = layout.getContext().getResources();
+
+        layout.setCustomTabView(new SmartTabLayout.TabProvider() {
+            @Override
+            public View createTabView(ViewGroup container, int position, PagerAdapter adapter) {
+                ImageView icon = (ImageView) inflater.inflate(R.layout.custom_tab_icon, container, false);
+
+                switch (position) {
+                    case 0:
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_emoji_recent_light));
+                        break;
+                    case 1:
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_emoji_people_light));
+                        break;
+                    case 2:
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_emoji_nature_light));
+                        break;
+                    case 3:
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_emoji_objects_light));
+                        break;
+                    case 4:
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_emoji_places_light));
+                        break;
+                    case 5:
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_emoji_symbols_light));
+                        break;
+                    default:
+                        throw new IllegalStateException("Invalid position: " + position);
+                }
+                return icon;
+            }
+        });
     }
 
     @Override
@@ -174,10 +203,6 @@ public class EmojiconsFragment extends Fragment implements ViewPager.OnPageChang
             case 3:
             case 4:
             case 5:
-                if (mEmojiTabLastSelectedIndex >= 0 && mEmojiTabLastSelectedIndex < mEmojiTabs.length) {
-                    mEmojiTabs[mEmojiTabLastSelectedIndex].setSelected(false);
-                }
-                mEmojiTabs[i].setSelected(true);
                 mEmojiTabLastSelectedIndex = i;
                 mRecentsManager.setRecentPage(i);
                 break;

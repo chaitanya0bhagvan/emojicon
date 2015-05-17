@@ -17,4 +17,13 @@
 <resources>
   <color name="horizontal_divider">#8f8f8f</color>
   <color name="horizontal_vertical">#8f8f8f</color>
+  <color name="icon_enabled">#FFFFFFFF</color>
+  <color name="icon_disabled">#FFFFFFFF</color>
+  <color name="text_enabled">#FFFFFFFF</color>
+  <color name="text_disabled">#4DFFFFFF</color>
+  <color name="white">#FFFFFFFF</color>
+  <color name="black_20">#33000000</color>
+  <color name="ColorPrimary">#009688</color>
+  <color name="ColorPrimaryDark">#00796B</color>
+  <color name="ColorAccent">#FF5252</color>
 </resources>
