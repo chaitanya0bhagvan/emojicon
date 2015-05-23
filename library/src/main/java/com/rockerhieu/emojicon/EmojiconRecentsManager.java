@@ -117,11 +117,16 @@ public class EmojiconRecentsManager extends ArrayList<Emojicon> {
         String str = prefs.getString(PREF_RECENTS, "");
         StringTokenizer tokenizer = new StringTokenizer(str, EmojiconRecentsManager.DELIMITER);
         while (tokenizer.hasMoreTokens()) {
-            add(Emojicon.fromChars(tokenizer.nextToken()));
+            try {
+              add(Emojicon.fromChars(tokenizer.nextToken()));
+            }
+            catch (NumberFormatException e) {
+                // ignored
+            }
         }
     }
 
-    private void saveRecents() {
+    public void saveRecents() {
         StringBuilder str = new StringBuilder();
         int c = size();
         for (int i = 0; i < c; i++) {

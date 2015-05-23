@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply from: 'gradle-mvn-push.gradle'
 
-ext.emojiconVersionName = "1.2-SNAPSHOT"
+ext.emojiconVersionName = "1.3"
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"

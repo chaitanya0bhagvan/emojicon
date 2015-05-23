@@ -16,6 +16,8 @@
   -->
 
 <resources>
+    <dimen name="keyboard_height">250dp</dimen>
+
     <declare-styleable name="Emojicon">
         <attr name="emojiconSize" format="dimension"/>
         <attr name="emojiconTextStart" format="integer"/>

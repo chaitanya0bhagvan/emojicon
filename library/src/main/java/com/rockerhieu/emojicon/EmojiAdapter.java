@@ -28,6 +28,8 @@ import com.rockerhieu.emojicon.emoji.Emojicon;
  * @author Hieu Rocker (rockerhieu@gmail.com)
  */
 class EmojiAdapter extends ArrayAdapter<Emojicon> {
+    EmojiconGridView.OnEmojiconClickedListener emojiClickListener;
+
     private boolean mUseSystemDefault = false;
 
     public EmojiAdapter(Context context, List<Emojicon> data) {
@@ -50,8 +52,12 @@ class EmojiAdapter extends ArrayAdapter<Emojicon> {
         mUseSystemDefault = useSystemDefault;
     }
 
+    public void setEmojiClickListener(EmojiconGridView.OnEmojiconClickedListener listener){
+        this.emojiClickListener = listener;
+    }
+
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (v == null) {
             v = View.inflate(getContext(), R.layout.emojicon_item, null);
@@ -63,6 +69,12 @@ class EmojiAdapter extends ArrayAdapter<Emojicon> {
         Emojicon emoji = getItem(position);
         ViewHolder holder = (ViewHolder) v.getTag();
         holder.icon.setText(emoji.getEmoji());
+        holder.icon.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				emojiClickListener.onEmojiconClicked(getItem(position));
+			}
+		});
         return v;
     }
 
