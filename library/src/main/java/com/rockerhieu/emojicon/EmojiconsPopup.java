@@ -18,6 +18,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -83,7 +84,11 @@ public class EmojiconsPopup extends PopupWindow implements ViewPager.OnPageChang
 		View customView = createCustomView();
 		setContentView(customView);
 		setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-		//default size 
+		setBackgroundDrawable(new BitmapDrawable());
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			setElevation(0f);
+		}
+		//default size
 		setSize(LayoutParams.MATCH_PARENT, (int) mContext.getResources().getDimension(R.dimen.keyboard_height));
 	}
 	/**
