@@ -253,7 +253,6 @@ public class EmojiconsPopup extends PopupWindow implements ViewPager.OnPageChang
 	public void setSize(int width, int height){
 		setWidth(width);
 		setHeight(height);
-		Log.d("EP", "setting size. W: " + width + " H: " + height);
 	}
 
 	private View createCustomView() {
