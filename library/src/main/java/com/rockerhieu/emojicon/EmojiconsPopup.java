@@ -24,7 +24,7 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.support.v7.internal.widget.AppCompatPopupWindow;
 import android.view.Gravity;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
@@ -37,7 +37,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.WindowManager.LayoutParams;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.rockerhieu.emojicon.emoji.Emojicon;
@@ -55,7 +54,7 @@ import java.util.List;
  * @author Chaitanya Bhagvan
  */
 
-public class EmojiconsPopup extends PopupWindow implements ViewPager.OnPageChangeListener, EmojiconRecents {
+public class EmojiconsPopup extends AppCompatPopupWindow implements ViewPager.OnPageChangeListener, EmojiconRecents {
 	private int mEmojiTabLastSelectedIndex = -1;
 	private PagerAdapter mEmojisAdapter;
 	private EmojiconRecentsManager mRecentsManager;
@@ -77,7 +76,7 @@ public class EmojiconsPopup extends PopupWindow implements ViewPager.OnPageChang
 	 * @param mContext The context of current activity.
 	 */
 	public EmojiconsPopup(View rootView, Context mContext, boolean useSystemDefault){
-		super(mContext);
+		super(mContext, null, 0);
 		this.mContext = mContext;
 		this.rootView = rootView;
 		this.mUseSystemDefault = useSystemDefault;

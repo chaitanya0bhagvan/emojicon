@@ -18,13 +18,14 @@ package com.rockerhieu.emojicon;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
 /**
  * @author Hieu Rocker (rockerhieu@gmail.com).
  */
-public class EmojiconEditText extends EditText {
+public class EmojiconEditText extends AppCompatEditText {
     private int mEmojiconSize;
     private int mEmojiconTextSize;
     private boolean mUseSystemDefault = false;
