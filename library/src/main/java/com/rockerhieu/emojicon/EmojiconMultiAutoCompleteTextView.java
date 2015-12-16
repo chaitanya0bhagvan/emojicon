@@ -18,31 +18,28 @@ package com.rockerhieu.emojicon;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v7.widget.AppCompatEditText;
 import android.text.style.DynamicDrawableSpan;
 import android.util.AttributeSet;
+import android.widget.MultiAutoCompleteTextView;
 
-/**
- * @author Hieu Rocker (rockerhieu@gmail.com).
- */
-public class EmojiconEditText extends AppCompatEditText {
+public class EmojiconMultiAutoCompleteTextView extends MultiAutoCompleteTextView {
     private int mEmojiconSize;
     private int mEmojiconAlignment;
     private int mEmojiconTextSize;
     private boolean mUseSystemDefault = false;
 
-    public EmojiconEditText(Context context) {
+    public EmojiconMultiAutoCompleteTextView(Context context) {
         super(context);
         mEmojiconSize = (int) getTextSize();
         mEmojiconTextSize = (int) getTextSize();
     }
 
-    public EmojiconEditText(Context context, AttributeSet attrs) {
+    public EmojiconMultiAutoCompleteTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
     }
 
-    public EmojiconEditText(Context context, AttributeSet attrs, int defStyle) {
+    public EmojiconMultiAutoCompleteTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs);
     }

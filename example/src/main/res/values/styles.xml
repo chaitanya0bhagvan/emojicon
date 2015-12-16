@@ -5,6 +5,8 @@
         <item name="colorPrimary">@color/ColorPrimary</item>
         <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
         <item name="colorAccent">@color/ColorAccent</item>
+        <item name="emojicon_background">@color/white</item>
+        <item name="emojicon_tabbar_background">@color/black_20</item>
 
         <!-- Customize your theme here. -->
     </style>

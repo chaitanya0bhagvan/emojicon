@@ -20,9 +20,15 @@
 
     <declare-styleable name="Emojicon">
         <attr name="emojiconSize" format="dimension"/>
+        <attr name="emojiconAlignment" format="enum">
+            <enum name="bottom" value="0"/>
+            <enum name="baseline" value="1"/>
+        </attr>
         <attr name="emojiconTextStart" format="integer"/>
         <attr name="emojiconTextLength" format="integer"/>
         <attr name="emojiconUseSystemDefault" format="boolean"/>
+        <attr name="emojicon_background" format="reference|color"/>
+        <attr name="emojicon_tabbar_background" format="reference|color"/>
     </declare-styleable>
     <declare-styleable name="TintableImageView">
         <attr name="tint" format="reference|color"/>

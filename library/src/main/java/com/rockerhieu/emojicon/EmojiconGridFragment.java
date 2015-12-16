@@ -16,17 +16,18 @@
 
 package com.rockerhieu.emojicon;
 
-import java.util.Arrays;
+import com.rockerhieu.emojicon.emoji.Emojicon;
+import com.rockerhieu.emojicon.emoji.People;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import com.rockerhieu.emojicon.emoji.Emojicon;
-import com.rockerhieu.emojicon.emoji.People;
 
 /**
  * @author Hieu Rocker (rockerhieu@gmail.com)
@@ -38,6 +39,7 @@ public class EmojiconGridFragment extends Fragment implements AdapterView.OnItem
     private boolean mUseSystemDefault = false;
 
     private static final String USE_SYSTEM_DEFAULT_KEY = "useSystemDefaults";
+    private static final String EMOJICONS_KEY = "emojicons";
 
     protected static EmojiconGridFragment newInstance(Emojicon[] emojicons, EmojiconRecents recents) {
         return newInstance(emojicons, recents, false);
@@ -46,7 +48,7 @@ public class EmojiconGridFragment extends Fragment implements AdapterView.OnItem
     protected static EmojiconGridFragment newInstance(Emojicon[] emojicons, EmojiconRecents recents, boolean useSystemDefault) {
         EmojiconGridFragment emojiGridFragment = new EmojiconGridFragment();
         Bundle args = new Bundle();
-        args.putSerializable("emojicons", emojicons);
+        args.putParcelableArray(EMOJICONS_KEY, emojicons);
         args.putBoolean(USE_SYSTEM_DEFAULT_KEY, useSystemDefault);
         emojiGridFragment.setArguments(args);
         emojiGridFragment.setRecents(recents);
@@ -66,8 +68,11 @@ public class EmojiconGridFragment extends Fragment implements AdapterView.OnItem
             mData = People.DATA;
             mUseSystemDefault = false;
         } else {
-            Object[] o = (Object[]) getArguments().getSerializable("emojicons");
-            mData = Arrays.asList(o).toArray(new Emojicon[o.length]);
+            Parcelable[] parcels = bundle.getParcelableArray(EMOJICONS_KEY);
+            mData = new Emojicon[parcels.length];
+            for (int i = 0; i < parcels.length; i++) {
+                mData[i] = (Emojicon) parcels[i];
+            }
             mUseSystemDefault = bundle.getBoolean(USE_SYSTEM_DEFAULT_KEY);
         }
         gridView.setAdapter(new EmojiAdapter(view.getContext(), mData, mUseSystemDefault));
@@ -77,7 +82,7 @@ public class EmojiconGridFragment extends Fragment implements AdapterView.OnItem
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable("emojicons", mData);
+        outState.putParcelableArray(EMOJICONS_KEY, mData);
     }
 
     @Override

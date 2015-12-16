@@ -34,10 +34,8 @@ public class EmojiconGridView {
 	EmojiconsPopup mEmojiconPopup;
     EmojiconRecents mRecents;
     Emojicon[] mData;
-	boolean mUseSystemDefault;
-    public EmojiconGridView(Context context, Emojicon[] emojicons, EmojiconRecents recents, EmojiconsPopup emojiconPopup, boolean useSystemDefault) {
+    public EmojiconGridView(Context context, Emojicon[] emojicons, EmojiconRecents recents, EmojiconsPopup emojiconPopup) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-		this.mUseSystemDefault = useSystemDefault;
 		mEmojiconPopup = emojiconPopup;
 		rootView = inflater.inflate(R.layout.emojicon_grid, null);
 		setRecents(recents);
@@ -48,7 +46,7 @@ public class EmojiconGridView {
 	            Object[] o = (Object[]) emojicons;
 	            mData = Arrays.asList(o).toArray(new Emojicon[o.length]);
 	        }
-	        EmojiAdapter mAdapter = new EmojiAdapter(rootView.getContext(), mData, mUseSystemDefault);
+	        EmojiAdapter mAdapter = new EmojiAdapter(rootView.getContext(), mData);
 	        mAdapter.setEmojiClickListener(new OnEmojiconClickedListener() {
 				
 				@Override

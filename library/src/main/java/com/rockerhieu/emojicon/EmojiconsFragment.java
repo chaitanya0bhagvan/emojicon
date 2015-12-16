@@ -22,17 +22,25 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.*;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 
-import com.ogaclejapan.smarttablayout.SmartTabLayout;
-import com.rockerhieu.emojicon.emoji.*;
+import com.rockerhieu.emojicon.emoji.Emojicon;
+import com.rockerhieu.emojicon.emoji.Nature;
+import com.rockerhieu.emojicon.emoji.Objects;
+import com.rockerhieu.emojicon.emoji.People;
+import com.rockerhieu.emojicon.emoji.Places;
+import com.rockerhieu.emojicon.emoji.Symbols;
 
 import java.util.Arrays;
 import java.util.List;
@@ -73,12 +81,12 @@ public class EmojiconsFragment extends Fragment implements ViewPager.OnPageChang
                 EmojiconGridFragment.newInstance(Symbols.DATA, recents, mUseSystemDefault)
         ));
         emojisPager.setAdapter(mEmojisAdapter);
-
-        final SmartTabLayout emojisTab = (SmartTabLayout) view.findViewById(R.id.emojis_tab);
-
+        final TabLayout emojisTab = (TabLayout) view.findViewById(R.id.emojis_tab);
+        emojisTab.setTabMode(TabLayout.MODE_FIXED);
+        emojisTab.setTabGravity(TabLayout.GRAVITY_FILL);
         setupTab(emojisTab);
-
-        emojisTab.setViewPager(emojisPager);
+        emojisTab.setupWithViewPager(emojisPager);
+        emojisTab.setTabsFromPagerAdapter(mEmojisAdapter);
 
         view.findViewById(R.id.emojis_backspace).setOnTouchListener(new RepeatListener(1000, 50, new View.OnClickListener() {
             @Override
@@ -107,40 +115,35 @@ public class EmojiconsFragment extends Fragment implements ViewPager.OnPageChang
         return view;
     }
 
-    private void setupTab(SmartTabLayout layout) {
+    private void setupTab(TabLayout layout) {
         final LayoutInflater inflater = LayoutInflater.from(layout.getContext());
         final Resources res = layout.getContext().getResources();
-
-        layout.setCustomTabView(new SmartTabLayout.TabProvider() {
-            @Override
-            public View createTabView(ViewGroup container, int position, PagerAdapter adapter) {
-                ImageView icon = (ImageView) inflater.inflate(R.layout.custom_tab_icon, container, false);
-
-                switch (position) {
-                    case 0:
-                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_emoji_recent_light));
-                        break;
-                    case 1:
-                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_emoji_people_light));
-                        break;
-                    case 2:
-                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_emoji_nature_light));
-                        break;
-                    case 3:
-                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_emoji_objects_light));
-                        break;
-                    case 4:
-                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_emoji_places_light));
-                        break;
-                    case 5:
-                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_emoji_symbols_light));
-                        break;
-                    default:
-                        throw new IllegalStateException("Invalid position: " + position);
-                }
-                return icon;
+        int tabcount = layout.getTabCount();
+        for(int i = 0; i < tabcount; i++) {
+            TabLayout.Tab tab = layout.getTabAt(i);
+            switch (i) {
+                case 0:
+                    tab.setIcon(res.getDrawable(R.drawable.ic_emoji_recent_light));
+                    break;
+                case 1:
+                    tab.setIcon(res.getDrawable(R.drawable.ic_emoji_people_light));
+                    break;
+                case 2:
+                    tab.setIcon(res.getDrawable(R.drawable.ic_emoji_nature_light));
+                    break;
+                case 3:
+                    tab.setIcon(res.getDrawable(R.drawable.ic_emoji_objects_light));
+                    break;
+                case 4:
+                    tab.setIcon(res.getDrawable(R.drawable.ic_emoji_places_light));
+                    break;
+                case 5:
+                    tab.setIcon(res.getDrawable(R.drawable.ic_emoji_symbols_light));
+                    break;
+//                default:
+//                    throw new IllegalStateException("Invalid position: " + position);
             }
-        });
+        }
     }
 
     @Override

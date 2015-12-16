@@ -17,60 +17,47 @@
 
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/background_material_light"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?attr/emojicon_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <android.support.percent.PercentRelativeLayout
         android:id="@+id/emojis_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="48dip"
-        android:paddingLeft="10dp"
-        android:paddingStart="10dp"
+        android:paddingLeft="0dp"
+        android:paddingStart="0dp"
         android:paddingRight="10dp"
         android:paddingEnd="10dp"
         android:layout_alignParentTop="true"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/emojicon_tabbar_background"
         android:orientation="horizontal">
 
-        <com.ogaclejapan.smarttablayout.SmartTabLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <android.support.design.widget.TabLayout
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/emojis_tab"
-            android:layout_weight="8.5"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            app:layout_widthPercent="85%"
+            android:layout_height="wrap_content"
             android:clipToPadding="false"
-            android:paddingBottom="8dp"
-
-            app:stl_defaultTabTextColor="@color/white"
-            app:stl_defaultTabTextHorizontalPadding="20dp"
-
-            app:stl_dividerColor="@android:color/transparent"
-            app:stl_dividerThickness="0dp"
-
-            app:stl_indicatorColor="?attr/colorAccent"
-            app:stl_indicatorInterpolation="linear"
-            app:stl_indicatorThickness="3dp"
-
-            app:stl_underlineColor="@android:color/transparent"
-            app:stl_underlineThickness="0dp"
-            app:stl_distributeEvenly="true"/>
+            android:paddingBottom="0dp"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:tabGravity="fill"/>
 
         <ImageButton
             android:background="@android:color/transparent"
             android:layout_gravity="center"
-            android:layout_width="0dip"
-            android:layout_height="30dp"
-            android:layout_weight="1.5"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="8dp"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="15%"
+            android:layout_toRightOf="@id/emojis_tab"
+            android:layout_toEndOf="@id/emojis_tab"
 
             android:id="@+id/emojis_backspace"
             android:src="@drawable/ic_backspace_white_24dp"
             android:scaleType="centerInside" />
 
-    </LinearLayout>
+    </android.support.percent.PercentRelativeLayout>
 
     <android.support.v4.view.ViewPager
         android:layout_below="@id/emojis_tab_layout"

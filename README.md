@@ -1,10 +1,12 @@
+[![Android Gems](http://www.android-gems.com/badge/rockerhieu/emojicon.svg?branch=master)](http://www.android-gems.com/lib/rockerhieu/emojicon)
+
+![master on Travis CI](https://travis-ci.org/rockerhieu/emojicon.png?branch=master) ![emojicon on Maven Central](https://maven-badges.herokuapp.com/maven-central/com.rockerhieu.emojicon/library/badge.svg)
+
 ## Emojicon
 
 Do you like emojis in Whatsapp, iMessage? [Emojicon](http://rockerhieu.github.io/emojicon/) is a library to implement such a thing for Android.
 
 Fore more information please see [the website](http://rockerhieu.github.io/emojicon/)
-
-`emojicon` on `master` ![master on Travis CI](https://travis-ci.org/rockerhieu/emojicon.png?branch=master)
 
 ## Example
 
@@ -18,6 +20,7 @@ Fore more information please see [the website](http://rockerhieu.github.io/emoji
     <com.rockerhieu.emojicon.EmojiconTextView
             android:id="@+id/txtEmojicon"
             android:text="I \ue32d emojicon"
+            emojicon:emojiconAlignment="baseline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -37,12 +40,13 @@ Fore more information please see [the website](http://rockerhieu.github.io/emoji
 
 ![image](https://github.com/rockerhieu/emojicon/raw/master/images/sample.jpg)
 
-_Note: You can change the size of emojis in XML layout through attribute `emojiconSize`._
+_Note: You can change the size and alignment of emojis in XML layout through attribute `emojiconSize` and `emojiconAlignment`, respectively._
 
 ## Usage
 
 * `EmojiconTextView`: a `TextView` which can render emojis.
 * `EmojiconEditText`: a `EditText` which can render emojis.
+* `EmojiconMultiAutoCompleteTextView`: a `MultiAutoCompleteTextView` which can render emojis.
 * `EmojiconGridFragment`: a fragment contains emojis in a `GridView` for the user to choose.
 * `EmojiconsFragment`: a fragment contains many set of emojis for the user to choose.
 
@@ -51,16 +55,12 @@ _Note: You can change the size of emojis in XML layout through attribute `emojic
 Via Gradle:
 
 ```
-compile 'com.rockerhieu.emojicon:library:1.0'
+compile 'com.rockerhieu.emojicon:library:<latest-version>'
 ```
-
-Releases can be found on either Maven Central or [Emojicon's Releases](https://github.com/rockerhieu/emojicon/releases/)
 
 ## Building in Eclipse
 
 ![Go home you're drunk](http://img2.wikia.nocookie.net/__cb20130819142928/cardfight/images/thumb/5/55/Go-home-youre-drunk.jpg/500px-Go-home-youre-drunk.jpg)
-
-If you want to drink more, go [here](https://github.com/rockerhieu/emojicon/wiki/Building-in-Eclipse)
 
 ## Acknowledgements
 

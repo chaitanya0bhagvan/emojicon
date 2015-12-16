@@ -68,7 +68,7 @@ public class MainActivity extends FragmentActivity implements EmojiconGridFragme
         final View rootView = findViewById(R.id.root_view);
 
         // Give the topmost view of your activity layout hierarchy. This will be used to measure soft keyboard height
-        final EmojiconsPopup popup = new EmojiconsPopup(rootView, this, false);
+        final EmojiconsPopup popup = new EmojiconsPopup(rootView, this);
 
         //Will automatically set size according to the soft keyboard size
         popup.setSizeForSoftKeyboard();
